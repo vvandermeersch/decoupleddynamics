@@ -29,7 +29,7 @@ group_coordinates <- data.frame(group_keys, grouped_stand = paste0("S", as.integ
 
 # Temporary
 # datasets <- datasets[datasets$dataset %in% c("ny052"),]
-datasets <- datasets[datasets$species_code == 'QUAL' & datasets$last_year >= 2017,]
+datasets <- datasets[datasets$species_code == 'ACSH' & datasets$last_year >= 2015,]
 
 
 # Prepare tree ring data!
@@ -223,7 +223,9 @@ padded_year_idx <- 1
 true_year_idx <- 0
 padding <- 15
 
-for(s in uniq_stand_ids[1:5]){
+for(s in uniq_stand_ids){
+  
+  # if(s == 'S116'){stop()}
   
   padding_counter <- 0
   
@@ -267,7 +269,7 @@ for(s in uniq_stand_ids[1:5]){
       nee_obs <- c(nee_obs, nee_obs_next)
       
       ndays <- 365 + padding
-    }else if(y == 21){
+    }else if(y == length(all_years)){
       true_year_idx <- true_year_idx + padding_counter + 1
       
       NEE_fname <- file.path(wd, 'data', 'xbase', paste0("NEE_", all_years[y-1], "_025_daily.nc"))
