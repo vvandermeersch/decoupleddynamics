@@ -43,10 +43,13 @@ for(i in 1:nrow(rw)){
   raw_units <- rw_data[length(rw_data)]
   
   if(raw_units == 999){
+    raw_units <- "0.01 mm"
     rw_data <- rw_data[1:(length(rw_data) - 1)] * 0.01
   } else if(raw_units == -9999){
+    raw_units <- "0.001 mm"
     rw_data <- rw_data[1:(length(rw_data) - 1)] * 0.001
   } else {
+    raw_units <- paste0(raw_units, " (unknown marker)")
     rw_data <- paste0(rw_data[1:(length(rw_data) - 1)], "?")
   }
   
